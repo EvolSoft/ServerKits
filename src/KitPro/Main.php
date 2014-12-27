@@ -28,7 +28,7 @@ class Main extends PluginBase{
     
 	//About Plugin Const
 	const PRODUCER = "EvolSoft";
-	const VERSION = "1.0";
+	const VERSION = "1.1";
 	const MAIN_WEBSITE = "http://www.evolsoft.tk";
 	//Other Const
 	//Prefix
