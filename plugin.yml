@@ -1,0 +1,48 @@
+name: KitPro
+main: KitPro\Main
+version: "1.1"
+api: [1.9.0]
+depend: [MassiveEconomy]
+load: STARTUP
+author: EvolSoft
+description: Create custom kits for your server
+website: https://www.evolsoft.tk
+
+commands:
+  kitpro:
+    aliases: [kpro]
+    description: KitPro Commands.
+    permission: kitpro
+  kit:
+    description: KitPro Kit command.
+    permission: kitpro.commands.kit
+permissions:
+  kitpro:
+    default: op
+    description: KitPro permissions.
+    children:
+      kitpro.kit:
+        default: op
+        description: KitPro Kit permissions.
+      kitpro.use-sign:
+        default: true
+        description: Allows player to use KitPro signs.
+      kitpro.create-sign:
+        default: op
+        description: Allows player to create KitPro signs.
+      kitpro.commands:
+        default: op
+        description: KitPro commands permissions.
+        children:
+          kitpro.commands.help:
+            default: op
+            description: KitPro command Help permission.
+          kitpro.commands.info:
+            default: op
+            description: KitPro command Info permission.
+          kitpro.commands.reload:
+            default: op
+            description: KitPro command Reload permission.
+          kitpro.commands.kit:
+            default: true
+            description: KitPro command Kit permission.
