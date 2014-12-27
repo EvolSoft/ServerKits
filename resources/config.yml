@@ -1,0 +1,7 @@
+---
+enable-default-kit: true
+default-kit: "Default"
+use-permissions: false
+enable-signs: true
+kit-received-message: "&aYou received the {KIT_NAME} &akit"
+...
