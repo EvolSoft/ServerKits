@@ -1,0 +1,45 @@
+---
+Default:
+  name: "&bDefault_KIT"
+  price: 0
+  items:
+    - "272 1"
+    - "274 1"
+    - "260 10"
+    - "298 1"
+    - "299 1"
+    - "300 1"
+    - "301 1"
+  commands:
+    - "tell {PLAYER} Kit Command Example"
+Tools:
+  name: "&2Tools"
+  price: 0
+  items:
+    - "272 1"
+    - "273 1"
+    - "274 1"
+    - "275 1"
+Iron:
+  name: "&7IronKit"
+  price: 50
+  items:
+    - "261 1"
+    - "262 16"
+    - "267 1"
+    - "306 1"
+    - "307 1"
+    - "308 1"
+    - "309 1"
+Diamond:
+  name: "&9D&bIAMON&9D"
+  price: 200
+  items:
+    - "261 1"
+    - "262 32"
+    - "276 1"
+    - "310 1"
+    - "311 1"
+    - "312 1"
+    - "313 1"
+...
