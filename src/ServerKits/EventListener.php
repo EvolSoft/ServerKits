@@ -1,15 +1,15 @@
 <?php
 
 /*
- * KitPro (v1.1) by EvolSoft
+ * ServerKits (v1.2) by EvolSoft
  * Developer: EvolSoft (Flavius12)
  * Website: http://www.evolsoft.tk
- * Date: 27/12/2014 04:00 PM (UTC)
+ * Date: 29/12/2014 09:36 AM (UTC)
  * Copyright & License: (C) 2014 EvolSoft
- * Licensed under MIT (https://github.com/EvolSoft/KitPro/blob/master/LICENSE)
+ * Licensed under MIT (https://github.com/EvolSoft/ServerKits/blob/master/LICENSE)
  */
 
-namespace KitPro;
+namespace ServerKits;
 
 use pocketmine\Player;
 use pocketmine\Server;
@@ -44,7 +44,7 @@ class EventListener extends PluginBase implements Listener{
     		$this->plugin->registerFirstJoin($player);
     		//Check use-permissions
     		if($this->plugin->getUsePermissions()){
-    			if($player->hasPermission("kitpro.kit." . strtolower($kit))){
+    			if($player->hasPermission("serverkits.kit." . strtolower($kit))){
     				$status = $this->plugin->giveKit($player, $kit);
     				if($status == 0){
     					$player->sendMessage($this->plugin->translateColors("&", Main::PREFIX . $this->plugin->getKitReceivedMessage($player, $kit)));
@@ -75,7 +75,7 @@ class EventListener extends PluginBase implements Listener{
     	//Check if Kit sign usage is allowed
     	if($this->plugin->getEnableSigns()){
     		//Checking Permissions
-    		if($event->getPlayer()->hasPermission("kitpro.use-sign") == true){
+    		if($event->getPlayer()->hasPermission("serverkits.use-sign") == true){
     			if($event->getBlock()->getID() == 323 || $event->getBlock()->getID() == 63 || $event->getBlock()->getID() == 68){
     				$sign = $event->getPlayer()->getLevel()->getTile($event->getBlock());
     				if($sign instanceof Sign){
@@ -85,13 +85,13 @@ class EventListener extends PluginBase implements Listener{
     					$sx = $sign->x;
     					$sy = $sign->y;
     					$sz = $sign->z;
-    					if($txtsign[0] == "[KitPro]"){
+    					if($txtsign[0] == "[ServerKits]"){
     						//Kit Sign
     						$player = $event->getPlayer();
     						$kit = $txtsign[1];
     						//Check use-permissions
     						if($this->plugin->getUsePermissions()){
-    							if($player->hasPermission("kitpro.kit." . strtolower($kit))){
+    							if($player->hasPermission("serverkits.kit." . strtolower($kit))){
     								$status = $this->plugin->giveKit($player, $kit);
     								if($status == 0){
     									$player->sendMessage($this->plugin->translateColors("&", Main::PREFIX . $this->plugin->getKitReceivedMessage($player, $kit)));
@@ -126,13 +126,13 @@ class EventListener extends PluginBase implements Listener{
     	//Check if Kit sign usage is allowed
     	if($this->plugin->getEnableSigns()){
     		//Checking Permissions
-    		if($event->getPlayer()->hasPermission("kitpro.create-sign") == true){
+    		if($event->getPlayer()->hasPermission("serverkits.create-sign") == true){
     			if($event->getBlock()->getID() == 323 || $event->getBlock()->getID() == 63 || $event->getBlock()->getID() == 68){
     				$sign = $event->getPlayer()->getLevel()->getTile($event->getBlock());
     				if($sign instanceof Sign){
     					$line0 = $event->getLine(0);
     					$line1 = $event->getLine(1);
-    					if($line0=='[KitPro]'){
+    					if($line0=='[ServerKits]'){
     						//Check if a kit is specified
     						if(empty($line1) !== true){
     							//Check if the kit exists
