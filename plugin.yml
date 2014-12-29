@@ -1,6 +1,6 @@
-name: KitPro
-main: KitPro\Main
-version: "1.1"
+name: ServerKits
+main: ServerKits\Main
+version: "1.2"
 api: [1.9.0]
 depend: [MassiveEconomy]
 load: STARTUP
@@ -9,40 +9,40 @@ description: Create custom kits for your server
 website: https://www.evolsoft.tk
 
 commands:
-  kitpro:
-    aliases: [kpro]
-    description: KitPro Commands.
-    permission: kitpro
+  serverkits:
+    aliases: [skits]
+    description: ServerKits Commands.
+    permission: serverkits
   kit:
-    description: KitPro Kit command.
-    permission: kitpro.commands.kit
+    description: ServerKits Kit command.
+    permission: serverkits.commands.kit
 permissions:
-  kitpro:
+  serverkits:
     default: op
-    description: KitPro permissions.
+    description: ServerKits permissions.
     children:
-      kitpro.kit:
+      serverkits.kit:
         default: op
-        description: KitPro Kit permissions.
-      kitpro.use-sign:
+        description: ServerKits Kit permissions.
+      serverkits.use-sign:
         default: true
-        description: Allows player to use KitPro signs.
-      kitpro.create-sign:
+        description: Allows player to use ServerKits signs.
+      serverkits.create-sign:
         default: op
-        description: Allows player to create KitPro signs.
-      kitpro.commands:
+        description: Allows player to create ServerKits signs.
+      serverkits.commands:
         default: op
-        description: KitPro commands permissions.
+        description: ServerKits commands permissions.
         children:
-          kitpro.commands.help:
+          serverkits.commands.help:
             default: op
-            description: KitPro command Help permission.
-          kitpro.commands.info:
+            description: ServerKits command Help permission.
+          serverkits.commands.info:
             default: op
-            description: KitPro command Info permission.
-          kitpro.commands.reload:
+            description: ServerKits command Info permission.
+          serverkits.commands.reload:
             default: op
-            description: KitPro command Reload permission.
-          kitpro.commands.kit:
+            description: ServerKits command Reload permission.
+          serverkits.commands.kit:
             default: true
-            description: KitPro command Kit permission.
+            description: ServerKits command Kit permission.
