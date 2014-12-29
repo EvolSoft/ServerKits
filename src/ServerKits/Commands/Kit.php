@@ -1,15 +1,15 @@
 <?php
 
 /*
- * KitPro (v1.1) by EvolSoft
+ * ServerKits (v1.2) by EvolSoft
  * Developer: EvolSoft (Flavius12)
  * Website: http://www.evolsoft.tk
- * Date: 27/12/2014 04:00 PM (UTC)
+ * Date: 29/12/2014 09:43 AM (UTC)
  * Copyright & License: (C) 2014 EvolSoft
- * Licensed under MIT (https://github.com/EvolSoft/KitPro/blob/master/LICENSE)
+ * Licensed under MIT (https://github.com/EvolSoft/ServerKits/blob/master/LICENSE)
  */
 
-namespace KitPro\Commands;
+namespace ServerKits\Commands;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\permission\Permission;
@@ -19,8 +19,8 @@ use pocketmine\command\CommandSender;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat;
 
-use KitPro\Main;
-use KitPro\EventListener;
+use ServerKits\Main;
+use ServerKits\EventListener;
 
 class Kit extends PluginBase implements CommandExecutor{
 
@@ -34,7 +34,7 @@ class Kit extends PluginBase implements CommandExecutor{
     		case "kit":
     			//Player Sender
     			if($sender instanceof Player){
-    				if($sender->hasPermission("kitpro.commands.kit")){
+    				if($sender->hasPermission("serverkits.commands.kit")){
     					//Initialize kit permissions
     					$this->plugin->initializeKitsPermissions();
     					//Check if use-permissions is enabled
@@ -43,7 +43,7 @@ class Kit extends PluginBase implements CommandExecutor{
     							//Check if kit exists
     							if($this->plugin->KitExists($args[0])){
     								//Check if player has kit permissions
-    								if($sender->hasPermission("kitpro.kit." . strtolower($args[0]))){
+    								if($sender->hasPermission("serverkits.kit." . strtolower($args[0]))){
     									$status = $this->plugin->giveKit($sender, $args[0]);
     									if($status == 0){
     										$sender->sendMessage($this->plugin->translateColors("&", Main::PREFIX . $this->plugin->getKitReceivedMessage($sender, $args[0])));
@@ -64,12 +64,12 @@ class Kit extends PluginBase implements CommandExecutor{
     							$sender->sendMessage($this->plugin->translateColors("&", Main::PREFIX . "&4Available Kits:"));
     							$kits = $this->plugin->getAllKits();
     							$result = "";
-    							if($sender->hasPermission("kitpro.kit." . strtolower($kits[0]))){
+    							if($sender->hasPermission("serverkits.kit." . strtolower($kits[0]))){
     								$result = $kits[0];
     							}
     							//Count all kits
     							for($i = 1; $i < count($kits); $i++){
-    								if($sender->hasPermission("kitpro.kit." . strtolower($kits[$i]))){
+    								if($sender->hasPermission("serverkits.kit." . strtolower($kits[$i]))){
     									$result = $result . ", " . $kits[$i];
     								}
     							}
