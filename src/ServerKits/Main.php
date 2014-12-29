@@ -1,15 +1,15 @@
 <?php
 
 /*
- * KitPro (v1.1) by EvolSoft
+ * ServerKits (v1.2) by EvolSoft
  * Developer: EvolSoft (Flavius12)
  * Website: http://www.evolsoft.tk
- * Date: 27/12/2014 04:00 PM (UTC)
+ * Date: 29/12/2014 09:36 AM (UTC)
  * Copyright & License: (C) 2014 EvolSoft
- * Licensed under MIT (https://github.com/EvolSoft/KitPro/blob/master/LICENSE)
+ * Licensed under MIT (https://github.com/EvolSoft/ServerKits/blob/master/LICENSE)
  */
 
-namespace KitPro;
+namespace ServerKits;
 
 use pocketmine\Player;
 use pocketmine\command\CommandExecutor;
@@ -28,11 +28,11 @@ class Main extends PluginBase{
     
 	//About Plugin Const
 	const PRODUCER = "EvolSoft";
-	const VERSION = "1.1";
+	const VERSION = "1.2";
 	const MAIN_WEBSITE = "http://www.evolsoft.tk";
 	//Other Const
 	//Prefix
-	const PREFIX = "&7[&cKit&4Pro&7] ";
+	const PREFIX = "&7[&cServer&4Kits&7] ";
 	
 	public $cfg;
 	
@@ -86,7 +86,7 @@ class Main extends PluginBase{
     	$this->cfg = $this->getConfig()->getAll();
     	//Checking if MassiveEconomyAPI version is compatible
     	if(MassiveEconomyAPI::getInstance()->getAPIVersion() == "0.90"){
-    		$this->getCommand("kitpro")->setExecutor(new Commands\Commands($this));
+    		$this->getCommand("serverkits")->setExecutor(new Commands\Commands($this));
     		$this->getCommand("kit")->setExecutor(new Commands\Kit($this));
     		$this->initializeKitsPermissions();
     		$this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
@@ -136,7 +136,7 @@ class Main extends PluginBase{
     	$tmp = $tmp->getAll();
     	$kits = $this->getAllKits();
     	for($i = 0; $i < count($kits); $i++){
-    		$permission = new Permission("kitpro.kit." . strtolower($kits[$i]), "KitPro " . $kits[$i] . " kit permission.");
+    		$permission = new Permission("serverkits.kit." . strtolower($kits[$i]), "ServerKits " . $kits[$i] . " kit permission.");
     		Server::getInstance()->getPluginManager()->addPermission($permission);
     	}
     }
