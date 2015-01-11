@@ -32,6 +32,7 @@ You can also set a default kit and players that will join for the first time on 
 **To-Do:**
 
 <dd><i>- Bug fix (if bugs will be found)</i></dd>
+<dd><i>- Other Economy plugins support</i></dd>
 <dd><i>- Get kit time limit</i></dd>
 
 ## Documentation 
