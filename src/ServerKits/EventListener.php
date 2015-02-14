@@ -1,11 +1,11 @@
 <?php
 
 /*
- * ServerKits (v1.2) by EvolSoft
+ * ServerKits (v1.3) by EvolSoft
  * Developer: EvolSoft (Flavius12)
  * Website: http://www.evolsoft.tk
- * Date: 29/12/2014 09:36 AM (UTC)
- * Copyright & License: (C) 2014 EvolSoft
+ * Date: 14/02/2015 12:31 AM (UTC)
+ * Copyright & License: (C) 2014-2015 EvolSoft
  * Licensed under MIT (https://github.com/EvolSoft/ServerKits/blob/master/LICENSE)
  */
 
@@ -138,8 +138,9 @@ class EventListener extends PluginBase implements Listener{
     							//Check if the kit exists
     							if($this->plugin->KitExists($line1)){
     								$price = $this->plugin->getKitPrice($line1);
-    								$symbol = MassiveEconomyAPI::getInstance()->getMoneySymbol();
-    								if($price > 0){
+    								//Check Economy support & Price
+    								if($this->plugin->economy == true && $price > 0){
+    									$symbol = MassiveEconomyAPI::getInstance()->getMoneySymbol();
     									$event->setLine(2, $price . $symbol);
     								}
     								$event->getPlayer()->sendMessage($this->plugin->translateColors("&", Main::PREFIX . "&aKit sign created"));
