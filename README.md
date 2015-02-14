@@ -8,7 +8,7 @@ PocketMine-MP plugins
 
 ## Requirements
 
-PocketMine-MP Alpha_1.4 API 1.9.0<br>
+PocketMine-MP Alpha_1.4 API 1.11.0<br>
 **Dependency Plugins:** MassiveEconomy v1.0 API 0.90
 
 ## Overview
@@ -18,7 +18,7 @@ PocketMine-MP Alpha_1.4 API 1.9.0<br>
 **EvolSoft Website:** http://www.evolsoft.tk
 
 ***This Plugin uses the New API. You can't install it on old versions of PocketMine.***<br>
-***YOU NEED MassiveEconomy TO USE THIS PLUGIN.***
+***Economy support is provided by MassiveEconomy plugin. Please install it if you want to add paid kits.***
 
 With ServerKits you can create custom free and paid kits for your server.<br>
 You can also set a default kit and players that will join for the first time on your server will get it and you can also place signs to get kits. (read documentation)<br>
@@ -32,7 +32,6 @@ You can also set a default kit and players that will join for the first time on 
 **To-Do:**
 
 <dd><i>- Bug fix (if bugs will be found)</i></dd>
-<dd><i>- Other Economy plugins support</i></dd>
 <dd><i>- Get kit time limit</i></dd>
 
 ## Documentation 
