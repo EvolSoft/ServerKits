@@ -1,11 +1,11 @@
 <?php
 
 /*
- * ServerKits (v1.2) by EvolSoft
+ * ServerKits (v1.3) by EvolSoft
  * Developer: EvolSoft (Flavius12)
  * Website: http://www.evolsoft.tk
- * Date: 29/12/2014 09:36 AM (UTC)
- * Copyright & License: (C) 2014 EvolSoft
+ * Date: 14/02/2015 12:19 AM (UTC)
+ * Copyright & License: (C) 2014-2015 EvolSoft
  * Licensed under MIT (https://github.com/EvolSoft/ServerKits/blob/master/LICENSE)
  */
 
@@ -28,13 +28,15 @@ class Main extends PluginBase{
     
 	//About Plugin Const
 	const PRODUCER = "EvolSoft";
-	const VERSION = "1.2";
+	const VERSION = "1.3";
 	const MAIN_WEBSITE = "http://www.evolsoft.tk";
 	//Other Const
 	//Prefix
 	const PREFIX = "&7[&cServer&4Kits&7] ";
 	
 	public $cfg;
+	
+	public $economy;
 	
 	public function translateColors($symbol, $message){
 	
@@ -84,15 +86,23 @@ class Main extends PluginBase{
     	$this->saveDefaultConfig();
     	$this->saveResource("kits.yml");
     	$this->cfg = $this->getConfig()->getAll();
-    	//Checking if MassiveEconomyAPI version is compatible
-    	if(MassiveEconomyAPI::getInstance()->getAPIVersion() == "0.90"){
-    		$this->getCommand("serverkits")->setExecutor(new Commands\Commands($this));
-    		$this->getCommand("kit")->setExecutor(new Commands\Kit($this));
-    		$this->initializeKitsPermissions();
-    		$this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
+    	$this->getCommand("serverkits")->setExecutor(new Commands\Commands($this));
+    	$this->getCommand("kit")->setExecutor(new Commands\Kit($this));
+    	$this->initializeKitsPermissions();
+    	$this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
+    	//Check if MassiveEconomy is installed
+    	if($this->getServer()->getPluginManager()->getPlugin("MassiveEconomy") != false){
+    		//Checking if MassiveEconomyAPI version is compatible
+    		if(MassiveEconomyAPI::getInstance()->getAPIVersion() == "0.90"){
+    			$this->economy = true;
+    			Server::getInstance()->getLogger()->info($this->translateColors("&", Main::PREFIX . "&aEconomy support enabled!"));
+    		}else{
+    			$this->economy = false;
+    			Server::getInstance()->getLogger()->info($this->translateColors("&", Main::PREFIX . "&cEconomy support not available. Please use MassiveEconomy (API v0.90)"));
+    		}
     	}else{
-    		Server::getInstance()->getLogger()->critical($this->translateColors("&", Main::PREFIX . "&cPlugin disabled. Please use MassiveEconomy (API v0.90)"));
-    		$this->getPluginLoader()->disablePlugin($this);
+    		$this->economy = false;
+    		Server::getInstance()->getLogger()->info($this->translateColors("&", Main::PREFIX . "&cEconomy support not available. Please install MassiveEconomy to enable Economy support"));
     	}
     }
     //Config Functions   
@@ -239,8 +249,8 @@ class Main extends PluginBase{
     		if($player->isCreative()){
     			return 2;
     		}else{
-    			//Checking Price
-    			if($this->getKitPrice($kit) != false && $this->getKitPrice($kit) > 0){
+    			//Checking Price & Economy support
+    			if($this->economy == true && $this->getKitPrice($kit) != false && $this->getKitPrice($kit) > 0){
     				$result = MassiveEconomyAPI::getInstance()->takeMoney($player->getName(), $this->getKitPrice($kit));
     				if($result == 2){
     					//Parse Items
