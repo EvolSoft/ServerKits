@@ -34,10 +34,17 @@ class Main extends PluginBase{
 	//Prefix
 	const PREFIX = "&7[&cServer&4Kits&7] ";
 	
+	/** @var array */
 	public $cfg;
-	
+	/** @var bool */
 	public $economy;
 	
+	/**
+	 * @param string $symbol
+	 * @param string $message
+	 *
+	 * @return string
+	 */
 	public function translateColors($symbol, $message){
 	
 		$message = str_replace($symbol."0", TextFormat::BLACK, $message);
@@ -67,12 +74,22 @@ class Main extends PluginBase{
 		return $message;
 	}
 	
+	/**
+	 * @param Player $player
+	 *
+	 * @return void
+	 */
 	public function registerFirstJoin(Player $player){
 		@mkdir($this->getDataFolder() . "data/");
 		$tmp = new Config($this->getDataFolder() . "data/" . strtolower($player->getName() . ".dat"));
 		$tmp->save();
 	}
 	
+	/**
+	 * @param Player $player
+	 *
+	 * @return bool
+	 */
 	public function hasJoinedFirstTime(Player $player){
 		if(file_exists($this->getDataFolder() . "data/" . strtolower($player->getName() . ".dat"))){
 			return false;
@@ -81,6 +98,9 @@ class Main extends PluginBase{
 		}
 	}
 	
+	/**
+	 * @return void
+	 */
     public function onEnable(){
     	@mkdir($this->getDataFolder());
     	$this->saveDefaultConfig();
@@ -106,26 +126,44 @@ class Main extends PluginBase{
     	}
     }
     //Config Functions   
+	/**
+	 * @return string
+	 */
     public function isDefaultKitEnabled(){
     	$tmp = $this->getConfig()->getAll();
     	return $tmp["enable-default-kit"];
     }
     
+	/**
+	 * @return string
+	 */
     public function getDefaultKit(){
     	$tmp = $this->getConfig()->getAll();
     	return $tmp["default-kit"];
     }
-    
+    //not sure
+	/**
+	 * @return array
+	 */
     public function getUsePermissions(){
     	$tmp = $this->getConfig()->getAll();
     	return $tmp["use-permissions"];
     }
     
+	/**
+	 * @return string
+	 */
     public function getEnableSigns(){
     	$tmp = $this->getConfig()->getAll();
     	return $tmp["enable-signs"];
     }
     
+	/**
+	 * @param Player $player
+	 * @param string $kit
+	 *
+	 * @return string
+	 */
     public function getKitReceivedMessage(Player $player, $kit){
     	$tmp = $this->getConfig()->getAll();
     	$format = $tmp["kit-received-message"];
@@ -141,6 +179,9 @@ class Main extends PluginBase{
 		return $format;
     }
     //Kits Config functions
+	/**
+	 * @return void
+	 */
     public function initializeKitsPermissions(){
     	$tmp = new Config($this->getDataFolder() . "kits.yml");
     	$tmp = $tmp->getAll();
@@ -151,18 +192,31 @@ class Main extends PluginBase{
     	}
     }
     
+	/**
+	 * @param string $kit
+	 *
+	 * @return bool
+	 */
     public function KitExists($kit){
     	$tmp = new Config($this->getDataFolder() . "kits.yml");
     	$tmp = $tmp->getAll();
     	return isset($tmp[$kit]);
     }
     
+	/**
+	 * @return string[]
+	 */
     public function getAllKits(){
     	$tmp = new Config($this->getDataFolder() . "kits.yml");
     	$tmp = $tmp->getAll();
     	return array_keys($tmp);
     }
     
+	/**
+	 * @param string $kit
+	 *
+	 * @return bool|string
+	 */
     public function getKitName($kit){
     	$tmp = new Config($this->getDataFolder() . "kits.yml");
     	$tmp = $tmp->getAll();
@@ -173,6 +227,11 @@ class Main extends PluginBase{
     	}
     }
     
+	/**
+	 * @param string $kit
+	 *
+	 * @return bool|string
+	 */
     public function getKitPrice($kit){
     	$tmp = new Config($this->getDataFolder() . "kits.yml");
     	$tmp = $tmp->getAll();
@@ -183,6 +242,12 @@ class Main extends PluginBase{
     	}
     }
 
+	/**
+	 * @param Player $player
+	 * @param string $kit
+	 *
+	 * @return int
+	 */
     public function parseKitItems(Player $player, $kit){
     	$tmp = new Config($this->getDataFolder() . "kits.yml");
     	$tmp = $tmp->getAll();
@@ -206,7 +271,13 @@ class Main extends PluginBase{
     		return 0;
     	}
     }
-    
+  
+	/**
+	 * @param Player $player
+	 * @param string $kit
+	 *
+	 * @return int
+	 */
     public function parseKitCommands(Player $player, $kit){
     	$tmp = new Config($this->getDataFolder() . "kits.yml");
     	$tmp = $tmp->getAll();
@@ -227,6 +298,13 @@ class Main extends PluginBase{
     	}
     }
     
+	/**
+	 * @param string $command
+	 * @param Player $player
+	 * @param string $kit
+	 *
+	 * @return string
+	 */
     public function getFormattedCommand($command, Player $player, $kit){
     	//Check if the kit exists
     	if($this->KitExists($kit)){
@@ -240,6 +318,12 @@ class Main extends PluginBase{
     	return $command;
     }
     
+	/**
+	 * @param Player $player
+	 * @param string $kit
+	 *
+	 * @return int
+	 */
     public function giveKit(Player $player, $kit){
     	$tmp = new Config($this->getDataFolder() . "kits.yml");
     	$tmp = $tmp->getAll();
